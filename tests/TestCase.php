@@ -2,9 +2,9 @@
 
 namespace GregPriday\ClaudeChat\Tests;
 
+use GregPriday\ClaudeChat\ClaudeChatServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use GregPriday\ClaudeChat\ClaudeChatServiceProvider;
 
 class TestCase extends Orchestra
 {
