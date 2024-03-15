@@ -91,6 +91,7 @@ class ClaudeChat
                     if (json_last_error() === JSON_ERROR_NONE && $jsonText !== '') {
                         // If the extracted text is valid JSON, update the content object
                         $content->type = 'object';
+                        $content->json = $jsonText;
                         $content->object = $jsonObject;
                     }
                 }
