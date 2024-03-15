@@ -11,7 +11,9 @@ use stdClass;
 class ClaudeChat
 {
     private Client $client;
+
     private string $apiKey;
+
     private string $apiUrl;
 
     public function __construct(string $apiKey, string $apiUrl)
@@ -44,8 +46,9 @@ class ClaudeChat
     /**
      * Send a request to the Claude API with custom arguments.
      *
-     * @param array $arguments The request payload for the Claude API.
+     * @param  array  $arguments  The request payload for the Claude API.
      * @return stdClass The response from the Claude API.
+     *
      * @throws GuzzleException
      */
     public function create(array $arguments): stdClass
@@ -70,11 +73,11 @@ class ClaudeChat
         $response = $this->create($arguments);
 
         // Check if the response has the 'content' field, and it's an array with at least one item
-        if (!empty($response->content)) {
+        if (! empty($response->content)) {
 
-            foreach($response->content as & $content) {
+            foreach ($response->content as &$content) {
                 // Re-add the ```json backticks to the response
-                $content->text = '```json' . $content->text;
+                $content->text = '```json'.$content->text;
 
                 // Extract the text between backticks, treating it as JSON
                 if (preg_match('/```json(.*?)```/s', $content->text, $matches)) {
@@ -97,6 +100,4 @@ class ClaudeChat
         // If the 'content' or 'text' key is not set, return the whole response as an array
         return $response;
     }
-
 }
-

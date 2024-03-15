@@ -12,7 +12,7 @@ class RequestTest extends TestCase
         $response = ClaudeChat::createJson([
             'system' => 'Always respond with a json object',
             'model' => ClaudeModels::MODEL_HAIKU,
-            'messages' => [['role' => 'user', 'content' => 'Hello, Claude!']]
+            'messages' => [['role' => 'user', 'content' => 'Hello, Claude!']],
         ]);
 
         $this->assertIsObject($response->content[0]->object);
