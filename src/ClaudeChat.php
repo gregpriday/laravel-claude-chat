@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\HandlerStack;
 use GuzzleRetry\GuzzleRetryMiddleware;
+use Illuminate\Support\Facades\Log;
 use stdClass;
 
 class ClaudeChat
@@ -57,13 +58,22 @@ class ClaudeChat
             'max_tokens' => 4096,
         ], $arguments);
 
-        $response = $this->client->post('', [
-            'json' => $arguments,
-        ]);
+        try {
+            $response = $this->client->post('', [
+                'json' => $arguments,
+            ]);
 
-        $responseData = json_decode($response->getBody()->getContents());
+            return json_decode($response->getBody()->getContents());
+        } catch (GuzzleException $e) {
+            // Log the error with Laravel's logging system
+            Log::error('Error sending request to the Claude API: ' . $e->getMessage(), [
+                'exception' => $e,
+                'arguments' => $arguments,
+            ]);
 
-        return $responseData;
+            // Optionally, rethrow the exception if you want the caller to handle it
+            throw $e;
+        }
     }
 
     public function createJson(array $arguments): stdClass
