@@ -66,7 +66,7 @@ class ClaudeChat
             return json_decode($response->getBody()->getContents());
         } catch (GuzzleException $e) {
             // Log the error with Laravel's logging system
-            Log::error('Error sending request to the Claude API: ' . $e->getMessage(), [
+            Log::error('Error sending request to the Claude API: '.$e->getMessage(), [
                 'exception' => $e,
                 'arguments' => $arguments,
             ]);
