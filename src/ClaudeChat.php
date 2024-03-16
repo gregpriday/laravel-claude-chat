@@ -85,7 +85,7 @@ class ClaudeChat
                     $jsonText = trim($matches[1]);
 
                     // Attempt to parse the extracted text as JSON
-                    $jsonObject = json_decode($jsonText);
+                    $jsonObject = json_decode($jsonText, true);
 
                     // Check if json_decode succeeded
                     if (json_last_error() === JSON_ERROR_NONE && $jsonText !== '') {
