@@ -22,7 +22,7 @@ composer require gregpriday/laravel-claude-chat
 Publish the configuration file:
 
 ```bash
-php artisan vendor:publish --tag="laravel-claude-chat-config"
+php artisan vendor:publish --provider="GregPriday\ClaudeChat\ClaudeChatServiceProvider"
 ```
 
 The published configuration file is located at `config/claude.php`. You need to set your Claude API key and endpoint in this file:
